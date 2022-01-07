@@ -1,2 +1,4 @@
 Starting audit...
+[ERROR] C:\Users\bogda\Desktop\diverse\anul 2\POO\Project1\.\src\main\Main.java:3:8: Unused import - annual.AnnualChanges. [UnusedImports]
 Audit done.
+Checkstyle ends with 1 errors.
