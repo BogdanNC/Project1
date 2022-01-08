@@ -1,15 +1,37 @@
 package players;
 
+import gifts.Gift;
+import visitor.ChildVisitor;
+
 import java.util.ArrayList;
 
-public abstract class Children {
+public class Children {
+    private final Long id;
     private final String lastName, firstName;
     private final String city;
     private Long age;
-    private final Long id;
-    private Double niceScore;
-    private ArrayList<String> giftPreferences;
+    private ArrayList<String> giftsPreferences;
+    private Double averageScore;
+    private ArrayList<Double> niceScoreHistory;
+    private Double assignedBudget;
+    private ArrayList<Gift> receivedGifts;
 
+    /**
+     * this is a copy constructor
+     * @param child
+     */
+    public Children(final Children child){
+        this.id = child.id;
+        this.lastName = child.lastName;
+        this.firstName = child.firstName;
+        this.city = child.city;
+        this.age = child.age;
+        this.assignedBudget = child.assignedBudget;
+        this.averageScore = child.averageScore;
+        this.giftsPreferences = new ArrayList<>(child.giftsPreferences);
+        this.niceScoreHistory = new ArrayList<>(child.niceScoreHistory);
+        this.receivedGifts = new ArrayList<>(child.receivedGifts);
+    }
     /**
      * constructor
      * @param id
@@ -17,19 +39,21 @@ public abstract class Children {
      * @param firstName
      * @param city
      * @param age
-     * @param niceScore
-     * @param giftPreferences
+     * @param niceScoreHistory
+     * @param giftsPreferences
      */
     public Children(final Long id, final String lastName, final String firstName,
                     final String city, final Long age,
-                    final Double niceScore, final ArrayList<String> giftPreferences) {
+                    final ArrayList<Double> niceScoreHistory, final ArrayList<String> giftsPreferences) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.city = city;
         this.age = age;
-        this.niceScore = niceScore;
-        this.giftPreferences = giftPreferences;
+        this.niceScoreHistory = niceScoreHistory;
+        this.giftsPreferences = giftsPreferences;
+        this.averageScore = 0.0;
+        this.assignedBudget = 0.0;
     }
 
     /**
@@ -83,31 +107,57 @@ public abstract class Children {
      * gets nice score
      * @return
      */
-    public Double getNiceScore() {
-        return niceScore;
+    public ArrayList<Double> getNiceScoreHistory() {
+        return niceScoreHistory;
     }
 
     /**
      * sets nice score if needed
-     * @param niceScore
+     * @param niceScoreHistory
      */
-    public void setNiceScore(final Double niceScore) {
-        this.niceScore = niceScore;
+    public void setNiceScoreHistory(final ArrayList<Double> niceScoreHistory) {
+        this.niceScoreHistory = niceScoreHistory;
     }
 
     /**
      * gets gift preferances
      * @return
      */
-    public ArrayList<String> getGiftPreferences() {
-        return giftPreferences;
+    public ArrayList<String> getGiftsPreferences() {
+        return giftsPreferences;
     }
 
     /**
      * modifies gift preferences
-     * @param giftPreferences
+     * @param giftsPreferences
      */
-    public void setGiftPreferences(final ArrayList<String> giftPreferences) {
-        this.giftPreferences = giftPreferences;
+    public void setGiftsPreferences(final ArrayList<String> giftsPreferences) {
+        this.giftsPreferences = giftsPreferences;
+    }
+    public void accept(ChildVisitor v) {
+        v.visit(this);
+    }
+    public Double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(Double averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public Double getAssignedBudget() {
+        return assignedBudget;
+    }
+
+    public void setAssignedBudget(Double assignedBudget) {
+        this.assignedBudget = assignedBudget;
+    }
+
+    public ArrayList<Gift> getReceivedGifts() {
+        return receivedGifts;
+    }
+
+    public void setReceivedGifts(ArrayList<Gift> receivedGifts) {
+        this.receivedGifts = receivedGifts;
     }
 }

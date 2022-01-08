@@ -1,17 +1,23 @@
 package main;
 
-import annual.AnnualChanges;
+import annual.Operator;
 import checker.Checker;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import common.Constants;
 import fileio.InputLoader;
+import gifts.Gift;
 import org.json.simple.parser.ParseException;
+import players.Children;
 import players.Database;
+import printer.AnnualChildren;
+import printer.Printer;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -54,13 +60,16 @@ public final class Main {
         deleteFiles(outputDirectory.listFiles());
 
         for (File file : Objects.requireNonNull(directory.listFiles())) {
-
-            String filepath = Constants.OUTPUT_PATH + file.getName();
-            File out = new File(filepath);
-            boolean isCreated = out.createNewFile();
-            if (isCreated) {
-                action(file.getAbsolutePath(), filepath);
-            }
+           // if (file.getName().equals("test11.json")) {
+                String fileName = file.getName();
+                fileName = fileName.substring(4);
+                String filepath = Constants.OUTPUT_PATH + fileName;
+                File out = new File(filepath);
+                boolean isCreated = out.createNewFile();
+                if (isCreated) {
+                    action(file.getAbsolutePath(), filepath);
+                }
+          //  }
         }
 
         Checker.calculateScore();
@@ -77,12 +86,40 @@ public final class Main {
         InputLoader inputLoader = new InputLoader(filePath1);
         inputLoader.readData();
         Database database = Database.getDatabase();
-        /*System.out.println(database.getInitialBudget());
-        //System.out.println(database.getNumberOfYears());
-        //System.out.println(database.getInitialChildren().size());
-        //System.out.println(database.getInitialGifts().size());
-        for (AnnualChanges year : database.getAnnualChanges()) {
-            System.out.println(year.getNewBudget());
-        }*/
+
+        Operator operator = new Operator();
+        operator.calculateAverageScore();
+        operator.calculateAlocatedBudget();
+        operator.alocateGifts();
+
+        ArrayList<Children> toPrintChildren = new ArrayList<>();
+        AnnualChildren annualChildren = new AnnualChildren();
+        ArrayList<AnnualChildren> forPrint = new ArrayList<>();
+
+        for (Children child : database.getInitialChildren()){
+            toPrintChildren.add(new Children(child));
+        }
+        annualChildren.setChildren(toPrintChildren);
+        forPrint.add(annualChildren);
+        for (int i = 0; i < database.getNumberOfYears(); i++ ){
+            AnnualChildren newAnnualChildren = new AnnualChildren();
+            ArrayList<Children> newToPrintChildren = new ArrayList<>();
+            operator.incrementRound(i);
+            operator.calculateAverageScore();
+            operator.calculateAlocatedBudget();
+            operator.alocateGifts();
+            for (Children child : database.getInitialChildren()) {
+                newToPrintChildren.add(new Children(child));
+            }
+            newAnnualChildren.setChildren(newToPrintChildren);
+            forPrint.add(newAnnualChildren);
+        }
+
+        Printer printer = new Printer();
+        printer.setAnnualChildren(forPrint);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writerWithDefaultPrettyPrinter()
+                .writeValue(new File(filePath2), printer);
     }
 }

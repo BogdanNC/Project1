@@ -10,7 +10,7 @@ public final class Database {
     private static Database database = null;
 
     private Long numberOfYears;
-    private Long initialBudget;
+    private Double initialBudget;
     private ArrayList<Children> initialChildren = new ArrayList<>();
     private ArrayList<Gift> initialGifts = new ArrayList<>();
     private ArrayList<AnnualChanges> annualChanges = new ArrayList<>();
@@ -36,11 +36,11 @@ public final class Database {
         this.numberOfYears = numberOfYears;
     }
 
-    public Long getInitialBudget() {
+    public Double getInitialBudget() {
         return initialBudget;
     }
 
-    public void setInitialBudget(final Long initialBudget) {
+    public void setInitialBudget(final Double initialBudget) {
         this.initialBudget = initialBudget;
     }
 

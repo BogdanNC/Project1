@@ -36,8 +36,9 @@ public final class InputLoader {
         String lastName = (String) ((JSONObject) jsonChild).get(Constants.LAST_NAME);
         String firstName = (String) ((JSONObject) jsonChild).get(Constants.FIRST_NAME);
         String city = (String) ((JSONObject) jsonChild).get(Constants.CITY);
-        Double niceScore = ((Long) ((JSONObject) jsonChild)
-                .get(Constants.NICE_SCORE)).doubleValue();
+        ArrayList<Double> niceScore = new ArrayList<>();
+        niceScore.add(((Long) ((JSONObject) jsonChild)
+                .get(Constants.NICE_SCORE)).doubleValue());
         JSONArray preferences = (JSONArray) ((JSONObject) jsonChild)
                 .get(Constants.GIFTS_PREFERENCES);
         ArrayList<String> giftPreference = new ArrayList<>();
@@ -48,12 +49,12 @@ public final class InputLoader {
             childList.add(new Baby(id, lastName, firstName, city, age, niceScore, giftPreference));
         } else if (age < Constants.TWELVE) {
             childList.add(new Kid(id, lastName, firstName, city, age, niceScore, giftPreference));
-        } else if (age < Constants.EIGHTEEN) {
+        } else if (age <= Constants.EIGHTEEN) {
             childList.add(new Teen(id, lastName, firstName, city, age, niceScore, giftPreference));
         }
     }
     private void addGifts(final Object jsonGifts, final ArrayList<Gift> giftsList) {
-        Long price = (Long) ((JSONObject) jsonGifts).get(Constants.PRICE);
+        Double price = ((Long) ((JSONObject) jsonGifts).get(Constants.PRICE)).doubleValue();
         String category = (String) ((JSONObject) jsonGifts).get(Constants.CATEGORY);
         String productName = (String) ((JSONObject) jsonGifts).get(Constants.PRODUCT_NAME);
         giftsList.add(new Gift(productName, price, category));
@@ -73,7 +74,7 @@ public final class InputLoader {
             JSONObject jsonObject = (JSONObject) jsonParser
                     .parse(new FileReader(inputPath));
             Long noYears = (Long) jsonObject.get(Constants.NUMBER_OF_YEARS);
-            Long sbudget = (Long) jsonObject.get(Constants.SANTA_BUDGET);
+            Double sbudget = ((Long) jsonObject.get(Constants.SANTA_BUDGET)).doubleValue();
             database.setInitialBudget(sbudget);
             database.setNumberOfYears(noYears);
 

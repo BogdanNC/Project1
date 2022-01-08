@@ -2,12 +2,12 @@ package gifts;
 
 public final class Gift {
     private final String productName;
-    private final Long cost;
+    private final Double price;
     private final String category;
 
-    public Gift(final String productName, final Long cost, final String category) {
+    public Gift(final String productName, final Double price, final String category) {
         this.productName = productName;
-        this.cost = cost;
+        this.price = price;
         this.category = category;
     }
 
@@ -15,8 +15,8 @@ public final class Gift {
         return productName;
     }
 
-    public Long getCost() {
-        return cost;
+    public Double getPrice() {
+        return price;
     }
 
     public String getCategory() {
