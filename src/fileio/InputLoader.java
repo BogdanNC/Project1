@@ -30,9 +30,15 @@ public final class InputLoader {
         return inputPath;
     }
 
+    /**
+     * Here i read all the elements given for a child and create a new
+     * object of the needed type (kid, baby, children)
+     * @param jsonChild
+     * @param childList
+     */
     private void addChildren(final Object jsonChild, final ArrayList<Children> childList) {
-        Long age = (Long) ((JSONObject) jsonChild).get(Constants.AGE);
-        Long id = (Long) ((JSONObject) jsonChild).get(Constants.ID);
+        Integer age = ((Long) ((JSONObject) jsonChild).get(Constants.AGE)).intValue();
+        Integer id = ((Long) ((JSONObject) jsonChild).get(Constants.ID)).intValue();
         String lastName = (String) ((JSONObject) jsonChild).get(Constants.LAST_NAME);
         String firstName = (String) ((JSONObject) jsonChild).get(Constants.FIRST_NAME);
         String city = (String) ((JSONObject) jsonChild).get(Constants.CITY);
@@ -61,14 +67,12 @@ public final class InputLoader {
     }
 
     /**
-     * aici citesc datele din fisiere
+     * here i read the data from the files
      */
     public void readData() {
         JSONParser jsonParser = new JSONParser();
         Database database;
         database = Database.getDatabase();
-        int numberOfYears = 0;
-        int initialBudget = 0;
 
         try {
             JSONObject jsonObject = (JSONObject) jsonParser

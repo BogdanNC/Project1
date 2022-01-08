@@ -5,7 +5,6 @@ import checker.Checker;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import common.Constants;
 import fileio.InputLoader;
-import gifts.Gift;
 import org.json.simple.parser.ParseException;
 import players.Children;
 import players.Database;
@@ -60,18 +59,16 @@ public final class Main {
         deleteFiles(outputDirectory.listFiles());
 
         for (File file : Objects.requireNonNull(directory.listFiles())) {
-           // if (file.getName().equals("test11.json")) {
                 String fileName = file.getName();
-                fileName = fileName.substring(4);
+                fileName = fileName.substring(Constants.FANTASTIC_FOUR);
                 String filepath = Constants.OUTPUT_PATH + fileName;
                 File out = new File(filepath);
                 boolean isCreated = out.createNewFile();
                 if (isCreated) {
-                    action(file.getAbsolutePath(), filepath);
+                    File testFile = new File("tests/" + file.getName());
+                    action(testFile.getPath(), filepath);
                 }
-          //  }
         }
-
         Checker.calculateScore();
     }
 
@@ -96,12 +93,12 @@ public final class Main {
         AnnualChildren annualChildren = new AnnualChildren();
         ArrayList<AnnualChildren> forPrint = new ArrayList<>();
 
-        for (Children child : database.getInitialChildren()){
+        for (Children child : database.getInitialChildren()) {
             toPrintChildren.add(new Children(child));
         }
         annualChildren.setChildren(toPrintChildren);
         forPrint.add(annualChildren);
-        for (int i = 0; i < database.getNumberOfYears(); i++ ){
+        for (int i = 0; i < database.getNumberOfYears(); i++) {
             AnnualChildren newAnnualChildren = new AnnualChildren();
             ArrayList<Children> newToPrintChildren = new ArrayList<>();
             operator.incrementRound(i);

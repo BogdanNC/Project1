@@ -18,7 +18,7 @@ public final class Database {
     private Database() { }
 
     /**
-     * singleton lazy implementation
+     * singleton lazy implementation of the database
      * @return
      */
     public static Database getDatabase() {

@@ -1,5 +1,6 @@
 package visitor;
 
+import common.Constants;
 import players.Baby;
 import players.Children;
 import players.Kid;
@@ -9,12 +10,19 @@ import java.util.ArrayList;
 
 public class SantasCalculator implements ChildVisitor {
     @Override
-    public void visit(Children children) {
+    /**
+     * i never get this case
+     */
+    public void visit(final Children children) {
         //nothing to see here
     }
 
+    /**
+     * calculates average score for kid
+     * @param kidChildren
+     */
     @Override
-    public void visit(Kid kidChildren) {
+    public void visit(final Kid kidChildren) {
         ArrayList<Double> niceScore = kidChildren.getNiceScoreHistory();
         Double sum = 0.0;
         for (Double elem: niceScore) {
@@ -24,8 +32,12 @@ public class SantasCalculator implements ChildVisitor {
         kidChildren.setAverageScore(sum);
     }
 
+    /**
+     * calculates average score for teen
+     * @param teenChildren
+     */
     @Override
-    public void visit(Teen teenChildren) {
+    public void visit(final Teen teenChildren) {
         ArrayList<Double> niceScore = teenChildren.getNiceScoreHistory();
         Double sum = 0.0, index = 1.0, totalOfN = 0.0;
         for (Double elem: niceScore) {
@@ -37,8 +49,12 @@ public class SantasCalculator implements ChildVisitor {
         teenChildren.setAverageScore(sum);
     }
 
+    /**
+     * calculates average score for baby
+     * @param babyChildren
+     */
     @Override
-    public void visit(Baby babyChildren) {
-        babyChildren.setAverageScore(10.0);
+    public void visit(final Baby babyChildren) {
+        babyChildren.setAverageScore(Constants.ANGELS_NOTE);
     }
 }

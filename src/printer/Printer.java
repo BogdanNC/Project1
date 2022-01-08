@@ -2,7 +2,7 @@ package printer;
 
 import java.util.ArrayList;
 
-public class Printer {
+public final class Printer {
 
     private ArrayList<AnnualChildren> annualChildren;
 
@@ -10,7 +10,7 @@ public class Printer {
         return annualChildren;
     }
 
-    public void setAnnualChildren(ArrayList<AnnualChildren> annualChildren) {
+    public void setAnnualChildren(final ArrayList<AnnualChildren> annualChildren) {
         this.annualChildren = annualChildren;
     }
 }

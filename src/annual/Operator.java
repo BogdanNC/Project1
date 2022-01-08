@@ -2,13 +2,20 @@ package annual;
 
 import common.Constants;
 import gifts.Gift;
-import players.*;
+import players.Children;
+import players.ChildrenUpdates;
+import players.Database;
+import players.Kid;
+import players.Teen;
 import visitor.SantasCalculator;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public final class Operator {
+    /**
+     * calculates the average score of a child
+     */
     public void calculateAverageScore() {
         Database database = Database.getDatabase();
         SantasCalculator elfVisit = new SantasCalculator();
@@ -16,6 +23,10 @@ public final class Operator {
             child.accept(elfVisit);
         }
     }
+
+    /**
+     * calculates alocated budget of a child
+     */
     public void calculateAlocatedBudget() {
         Double budgetUnit, averageScoreSum = 0.0;
         Database database = Database.getDatabase();
@@ -27,6 +38,10 @@ public final class Operator {
             child.setAssignedBudget(child.getAverageScore() * budgetUnit);
         }
     }
+
+    /**
+     * calculates gifts
+     */
     public void alocateGifts() {
         Double budget;
         int ok;
@@ -44,13 +59,13 @@ public final class Operator {
                                 aux = gift; // iau primul cadou din categorie daca gasesc
                                 ok = 1;
                             } else {
-                                if (aux.getPrice() > gift.getPrice()){
+                                if (aux.getPrice() > gift.getPrice()) {
                                     aux = gift; //iau cel mai ieftin cadou din categorie
                                 }
                             }
                         }
                     }
-                    if (aux != null){
+                    if (aux != null) {
                         if (budget + aux.getPrice() <= child.getAssignedBudget()) {
                             alocatedGifts.add(aux);
                             budget = budget + aux.getPrice();
@@ -61,12 +76,21 @@ public final class Operator {
             child.setReceivedGifts(alocatedGifts);
         }
     }
-    public void realocateBudget(int noYear) {
+
+    /**
+     * uploads the budget form the database
+     * @param noYear
+     */
+    public void realocateBudget(final int noYear) {
         Database database = Database.getDatabase();
         AnnualChanges annualChange;
         annualChange = database.getAnnualChanges().get(noYear);
         database.setInitialBudget(annualChange.getNewBudget());
     }
+
+    /**
+     * increses all children ages with 1
+     */
     public void incrementChildrensAge() {
         Database database = Database.getDatabase();
         ArrayList<Children> childrenList = database.getInitialChildren();
@@ -76,14 +100,17 @@ public final class Operator {
             child.setAge(child.getAge() + 1);
 
             if (child.getAge().intValue() == Constants.FIVE) {
-                updatedChildrenList.add(new Kid(child.getId(), child.getLastName(), child.getFirstName(),
-                        child.getCity(), child.getAge(), child.getNiceScoreHistory(),
+                updatedChildrenList.add(new Kid(child.getId(), child.getLastName(),
+                        child.getFirstName(), child.getCity(),
+                        child.getAge(), child.getNiceScoreHistory(),
                         child.getGiftsPreferences()));
             } else if (child.getAge().intValue() == Constants.TWELVE) {
-                updatedChildrenList.add(new Teen(child.getId(), child.getLastName(), child.getFirstName(),
-                        child.getCity(), child.getAge(), child.getNiceScoreHistory(),
+                updatedChildrenList.add(new Teen(child.getId(), child.getLastName(),
+                        child.getFirstName(), child.getCity(),
+                        child.getAge(), child.getNiceScoreHistory(),
                         child.getGiftsPreferences()));
             } else if (child.getAge().intValue() > Constants.EIGHTEEN) {
+                continue;
                 //nothing to see here
             } else {
                 updatedChildrenList.add(child);
@@ -91,7 +118,12 @@ public final class Operator {
         }
         database.setInitialChildren(updatedChildrenList);
     }
-    public void addGifts(int noYear){
+
+    /**
+     * adds new gifts in the database
+     * @param noYear
+     */
+    public void addGifts(final int noYear) {
         Database database = Database.getDatabase();
         AnnualChanges annualChange;
         ArrayList<Gift> oldGifts = database.getInitialGifts();
@@ -101,18 +133,27 @@ public final class Operator {
         }
         database.setInitialGifts(oldGifts);
     }
-    public void addNewChildren(int noYear) {
+
+    /**
+     * adds all the new children in the database
+     * @param noYear
+     */
+    public void addNewChildren(final int noYear) {
         Database database = Database.getDatabase();
         AnnualChanges annualChange;
         annualChange = database.getAnnualChanges().get(noYear);
         ArrayList<Children> childList = database.getInitialChildren();
-        for (Children child: annualChange.getNewChildren()){
+        for (Children child: annualChange.getNewChildren()) {
             childList.add(child);
         }
         database.setInitialChildren(childList);
     }
-    public void updateChildrens(int noYear) {
-        int ok, index;
+
+    /**
+     * updates the childrens
+     * @param noYear
+     */
+    public void updateChildrens(final int noYear) {
         Database database = Database.getDatabase();
         AnnualChanges annualChange;
         annualChange = database.getAnnualChanges().get(noYear);
@@ -134,12 +175,16 @@ public final class Operator {
             }
         }
     }
-    public void incrementRound(int noYear){
+
+    /**
+     * adds the data from specific year to the database
+     * @param noYear
+     */
+    public void incrementRound(final int noYear) {
         realocateBudget(noYear);
         incrementChildrensAge();
         addGifts(noYear);
         addNewChildren(noYear);
         updateChildrens(noYear);
     }
-
 }

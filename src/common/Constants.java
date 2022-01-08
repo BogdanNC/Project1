@@ -27,7 +27,9 @@ public final class Constants {
     public static final String NEW_CHILDREN = "newChildren";
     public static final String CHILDREN_UPDATES = "childrenUpdates";
     public static final Integer FIVE = 5;
+    public static final Integer FANTASTIC_FOUR = 4;
     public static final Integer TWELVE = 12;
+    public static final Double ANGELS_NOTE = 10.0;
     public static final Integer EIGHTEEN = 18;
     public static final Integer SMALL_TEST_POINTS = 2;
     public static final Integer BIG_TEST_POINTS = 3;

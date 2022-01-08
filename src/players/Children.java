@@ -6,10 +6,10 @@ import visitor.ChildVisitor;
 import java.util.ArrayList;
 
 public class Children {
-    private final Long id;
+    private final Integer id;
     private final String lastName, firstName;
     private final String city;
-    private Long age;
+    private Integer age;
     private ArrayList<String> giftsPreferences;
     private Double averageScore;
     private ArrayList<Double> niceScoreHistory;
@@ -20,7 +20,7 @@ public class Children {
      * this is a copy constructor
      * @param child
      */
-    public Children(final Children child){
+    public Children(final Children child) {
         this.id = child.id;
         this.lastName = child.lastName;
         this.firstName = child.firstName;
@@ -42,9 +42,10 @@ public class Children {
      * @param niceScoreHistory
      * @param giftsPreferences
      */
-    public Children(final Long id, final String lastName, final String firstName,
-                    final String city, final Long age,
-                    final ArrayList<Double> niceScoreHistory, final ArrayList<String> giftsPreferences) {
+    public Children(final Integer id, final String lastName, final String firstName,
+                    final String city, final Integer age,
+                    final ArrayList<Double> niceScoreHistory,
+                    final ArrayList<String> giftsPreferences) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -60,7 +61,7 @@ public class Children {
      * gets id
      * @return
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -92,7 +93,7 @@ public class Children {
      * gets age
      * @return
      */
-    public Long getAge() {
+    public Integer getAge() {
         return age;
     }
 
@@ -100,7 +101,7 @@ public class Children {
      * sets age as years go by
      * @param age
      */
-    public void setAge(final Long age) {
+    public void setAge(final Integer age) {
         this.age = age;
     }
     /**
@@ -134,30 +135,61 @@ public class Children {
     public void setGiftsPreferences(final ArrayList<String> giftsPreferences) {
         this.giftsPreferences = giftsPreferences;
     }
-    public void accept(ChildVisitor v) {
+
+    /**
+     * i used visitor pattern to calculate individual scores separately
+     * and to have clean clear classes
+     * @param v
+     */
+    public void accept(final ChildVisitor v) {
         v.visit(this);
     }
+
+    /**
+     * it's a getter
+     * @return
+     */
     public Double getAverageScore() {
         return averageScore;
     }
 
-    public void setAverageScore(Double averageScore) {
+    /**
+     * it's a setter
+     * @param averageScore
+     */
+    public void setAverageScore(final Double averageScore) {
         this.averageScore = averageScore;
     }
 
+    /**
+     * it's a getter
+     * @return
+     */
     public Double getAssignedBudget() {
         return assignedBudget;
     }
 
-    public void setAssignedBudget(Double assignedBudget) {
+    /**
+     * look! a setter
+     * @param assignedBudget
+     */
+    public void setAssignedBudget(final Double assignedBudget) {
         this.assignedBudget = assignedBudget;
     }
 
+    /**
+     * you won't guess it
+     * @return
+     */
     public ArrayList<Gift> getReceivedGifts() {
         return receivedGifts;
     }
 
-    public void setReceivedGifts(ArrayList<Gift> receivedGifts) {
+    /**
+     * I want the checkstyle points !!
+     * @param receivedGifts
+     */
+    public void setReceivedGifts(final ArrayList<Gift> receivedGifts) {
         this.receivedGifts = receivedGifts;
     }
 }
