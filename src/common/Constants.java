@@ -17,14 +17,18 @@ public final class Constants {
     public static final String FIRST_NAME = "firstName";
     public static final String CITY = "city";
     public static final String NICE_SCORE = "niceScore";
+    public static final String NICE_SCORE_BONUS = "niceScoreBonus";
     public static final String GIFTS_PREFERENCES = "giftsPreferences";
+    public static final String ELF = "elf";
     public static final String PRODUCT_NAME = "productName";
     public static final String PRICE = "price";
     public static final String CATEGORY = "category";
+    public static final String QUANTITY = "quantity";
     public static final String ANNUAL_CHANGES = "annualChanges";
     public static final String NEW_SANTA_BUDGET = "newSantaBudget";
     public static final String NEW_GIFTS = "newGifts";
     public static final String NEW_CHILDREN = "newChildren";
+    public static final String STRATEGY = "strategy";
     public static final String CHILDREN_UPDATES = "childrenUpdates";
     public static final Integer FIVE = 5;
     public static final Integer FANTASTIC_FOUR = 4;
@@ -37,6 +41,7 @@ public final class Constants {
     public static final Integer MAXIMUM_ERROR_CHECKSTYLE = 30;
     public static final Integer CHECKSTYLE_POINTS = 10;
     public static final Integer TESTS_NUMBER_SMALL = 15;
+    public static final Integer ONE_HUNDRED = 100;
 
     private Constants() {
         //constructor for checkstyle

@@ -1,7 +1,9 @@
 package players;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import gifts.Gift;
 import visitor.ChildVisitor;
+import visitor.ElfVisitor;
 
 import java.util.ArrayList;
 
@@ -13,8 +15,12 @@ public class Children {
     private ArrayList<String> giftsPreferences;
     private Double averageScore;
     private ArrayList<Double> niceScoreHistory;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Double niceScoreBonus;
     private Double assignedBudget;
     private ArrayList<Gift> receivedGifts;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String elf;
 
     /**
      * this is a copy constructor
@@ -31,6 +37,9 @@ public class Children {
         this.giftsPreferences = new ArrayList<>(child.giftsPreferences);
         this.niceScoreHistory = new ArrayList<>(child.niceScoreHistory);
         this.receivedGifts = new ArrayList<>(child.receivedGifts);
+        this.niceScoreBonus = child.niceScoreBonus;
+        this.elf = child.elf;
+
     }
     /**
      * constructor
@@ -45,16 +54,19 @@ public class Children {
     public Children(final Integer id, final String lastName, final String firstName,
                     final String city, final Integer age,
                     final ArrayList<Double> niceScoreHistory,
-                    final ArrayList<String> giftsPreferences) {
+                    final ArrayList<String> giftsPreferences,
+                    final Double niceScoreBonus, final String elf) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.city = city;
         this.age = age;
         this.niceScoreHistory = niceScoreHistory;
+        this.niceScoreBonus = niceScoreBonus;
         this.giftsPreferences = giftsPreferences;
         this.averageScore = 0.0;
         this.assignedBudget = 0.0;
+        this.elf = elf;
     }
 
     /**
@@ -191,5 +203,37 @@ public class Children {
      */
     public void setReceivedGifts(final ArrayList<Gift> receivedGifts) {
         this.receivedGifts = receivedGifts;
+    }
+
+    /**
+     * gets niceScoreBonus
+     * @return
+     */
+    public Double getNiceScoreBonus() {
+        return niceScoreBonus;
+    }
+
+    /**
+     * gets elf
+     * @return
+     */
+    public String getElf() {
+        return elf;
+    }
+
+    /**
+     * sets elf
+     * @param elf
+     */
+    public void setElf(final String elf) {
+        this.elf = elf;
+    }
+
+    /**
+     * this is the interaction with elfs
+     * @param v
+     */
+    public void acceptElf(final ElfVisitor v) {
+        v.elfVisit(this);
     }
 }

@@ -11,14 +11,17 @@ public final class AnnualChanges {
     private ArrayList<Children> newChildren;
     private ArrayList<Gift> newGifts;
     private ArrayList<ChildrenUpdates> newChildUpdates;
+    private String strategy;
 
     public AnnualChanges(final Double newBudget, final ArrayList<Children> newChildren,
                          final ArrayList<Gift> newGifts,
-                         final ArrayList<ChildrenUpdates> newChildUpdates) {
+                         final ArrayList<ChildrenUpdates> newChildUpdates,
+                         final String strategy) {
         this.newBudget = newBudget;
         this.newChildren = newChildren;
         this.newGifts = newGifts;
         this.newChildUpdates = newChildUpdates;
+        this.strategy = strategy;
     }
 
     public Double getNewBudget() {
@@ -51,5 +54,9 @@ public final class AnnualChanges {
 
     public void setNewChildUpdates(final ArrayList<ChildrenUpdates> newChildUpdates) {
         this.newChildUpdates = newChildUpdates;
+    }
+
+    public String getStrategy() {
+        return strategy;
     }
 }

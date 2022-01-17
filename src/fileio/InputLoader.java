@@ -51,19 +51,26 @@ public final class InputLoader {
         for (Object jsonPreference : preferences) {
             giftPreference.add(jsonPreference.toString());
         }
+        Double niceScoreBonus = ((Long) ((JSONObject) jsonChild)
+                .get(Constants.NICE_SCORE_BONUS)).doubleValue();
+        String elf = (String) ((JSONObject) jsonChild).get(Constants.ELF);
         if (age < Constants.FIVE) {
-            childList.add(new Baby(id, lastName, firstName, city, age, niceScore, giftPreference));
+            childList.add(new Baby(id, lastName, firstName, city, age,
+                    niceScore, giftPreference, niceScoreBonus, elf));
         } else if (age < Constants.TWELVE) {
-            childList.add(new Kid(id, lastName, firstName, city, age, niceScore, giftPreference));
+            childList.add(new Kid(id, lastName, firstName, city, age,
+                    niceScore, giftPreference, niceScoreBonus, elf));
         } else if (age <= Constants.EIGHTEEN) {
-            childList.add(new Teen(id, lastName, firstName, city, age, niceScore, giftPreference));
+            childList.add(new Teen(id, lastName, firstName, city, age,
+                    niceScore, giftPreference, niceScoreBonus, elf));
         }
     }
     private void addGifts(final Object jsonGifts, final ArrayList<Gift> giftsList) {
         Double price = ((Long) ((JSONObject) jsonGifts).get(Constants.PRICE)).doubleValue();
         String category = (String) ((JSONObject) jsonGifts).get(Constants.CATEGORY);
         String productName = (String) ((JSONObject) jsonGifts).get(Constants.PRODUCT_NAME);
-        giftsList.add(new Gift(productName, price, category));
+        Integer quantity = ((Long) ((JSONObject) jsonGifts).get(Constants.QUANTITY)).intValue();
+        giftsList.add(new Gift(productName, price, category, quantity));
     }
 
     /**
@@ -151,11 +158,14 @@ public final class InputLoader {
                         for (Object jsonPreference : preferences) {
                             giftPreference.add(jsonPreference.toString());
                         }
-                        childUpdates.add(new ChildrenUpdates(id, niceScore, giftPreference));
+                        String elf = (String) ((JSONObject) jsonUpdate).get(Constants.ELF);
+                        childUpdates.add(new ChildrenUpdates(id, niceScore, giftPreference, elf));
                     }
                 }
+                String strategy = (String) ((JSONObject) yearChange)
+                        .get(Constants.STRATEGY);
                 annualChanges.add(new AnnualChanges(newBugdet, newChidsList,
-                        newGiftsList, childUpdates));
+                        newGiftsList, childUpdates, strategy));
             }
             database.setAnnualChanges(annualChanges);
 

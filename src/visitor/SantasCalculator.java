@@ -24,11 +24,16 @@ public class SantasCalculator implements ChildVisitor {
     @Override
     public void visit(final Kid kidChildren) {
         ArrayList<Double> niceScore = kidChildren.getNiceScoreHistory();
-        Double sum = 0.0;
+        Double sum = 0.0, bonusScore;
         for (Double elem: niceScore) {
             sum = sum + elem;
         }
         sum = sum / niceScore.size();
+        bonusScore = kidChildren.getNiceScoreBonus();
+        sum = sum + sum * bonusScore / Constants.ONE_HUNDRED;
+        if (sum > Constants.ANGELS_NOTE) {
+            sum = Constants.ANGELS_NOTE;
+        }
         kidChildren.setAverageScore(sum);
     }
 
@@ -39,13 +44,18 @@ public class SantasCalculator implements ChildVisitor {
     @Override
     public void visit(final Teen teenChildren) {
         ArrayList<Double> niceScore = teenChildren.getNiceScoreHistory();
-        Double sum = 0.0, index = 1.0, totalOfN = 0.0;
+        Double sum = 0.0, index = 1.0, totalOfN = 0.0, bonusScore;
         for (Double elem: niceScore) {
             sum = sum + (elem * index);
             totalOfN = totalOfN + index;
             index = index + 1.0;
         }
         sum = sum / totalOfN;
+        bonusScore = teenChildren.getNiceScoreBonus();
+        sum = sum + sum * bonusScore / Constants.ONE_HUNDRED;
+        if (sum > Constants.ANGELS_NOTE) {
+            sum = Constants.ANGELS_NOTE;
+        }
         teenChildren.setAverageScore(sum);
     }
 

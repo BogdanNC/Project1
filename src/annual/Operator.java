@@ -7,6 +7,7 @@ import players.ChildrenUpdates;
 import players.Database;
 import players.Kid;
 import players.Teen;
+import visitor.ElfCalculator;
 import visitor.SantasCalculator;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ public final class Operator {
      */
     public void calculateAverageScore() {
         Database database = Database.getDatabase();
-        SantasCalculator elfVisit = new SantasCalculator();
+        SantasCalculator santaVisit = new SantasCalculator();
         for (Children child: database.getInitialChildren()) {
-            child.accept(elfVisit);
+            child.accept(santaVisit);
         }
     }
 
@@ -33,9 +34,11 @@ public final class Operator {
         for (Children child: database.getInitialChildren()) {
             averageScoreSum = averageScoreSum + child.getAverageScore();
         }
+        ElfCalculator elfVisitor = new ElfCalculator();
         budgetUnit = database.getInitialBudget() / averageScoreSum;
         for (Children child: database.getInitialChildren()) {
             child.setAssignedBudget(child.getAverageScore() * budgetUnit);
+            child.acceptElf(elfVisitor);
         }
     }
 
@@ -103,12 +106,12 @@ public final class Operator {
                 updatedChildrenList.add(new Kid(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getCity(),
                         child.getAge(), child.getNiceScoreHistory(),
-                        child.getGiftsPreferences()));
+                        child.getGiftsPreferences(), child.getNiceScoreBonus(), child.getElf()));
             } else if (child.getAge().intValue() == Constants.TWELVE) {
                 updatedChildrenList.add(new Teen(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getCity(),
                         child.getAge(), child.getNiceScoreHistory(),
-                        child.getGiftsPreferences()));
+                        child.getGiftsPreferences(), child.getNiceScoreBonus(), child.getElf()));
             } else if (child.getAge().intValue() > Constants.EIGHTEEN) {
                 continue;
                 //nothing to see here
