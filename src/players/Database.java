@@ -14,6 +14,7 @@ public final class Database {
     private ArrayList<Children> initialChildren = new ArrayList<>();
     private ArrayList<Gift> initialGifts = new ArrayList<>();
     private ArrayList<AnnualChanges> annualChanges = new ArrayList<>();
+    private String currentStrategy = "id";
 
     private Database() { }
 
@@ -66,5 +67,13 @@ public final class Database {
 
     public void setAnnualChanges(final ArrayList<AnnualChanges> annualChanges) {
         this.annualChanges = annualChanges;
+    }
+
+    public String getCurrentStrategy() {
+        return currentStrategy;
+    }
+
+    public void setCurrentStrategy(String currentStrategy) {
+        this.currentStrategy = currentStrategy;
     }
 }

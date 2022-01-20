@@ -7,7 +7,7 @@ public final class Gift {
     private final Double price;
     private final String category;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private final Integer quantity;
+    private Integer quantity;
 
     public Gift(final String productName, final Double price,
                 final String category, final Integer quantity) {
@@ -31,5 +31,9 @@ public final class Gift {
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(final Integer quantity) {
+        this.quantity = quantity;
     }
 }

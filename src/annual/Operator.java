@@ -7,10 +7,15 @@ import players.ChildrenUpdates;
 import players.Database;
 import players.Kid;
 import players.Teen;
+import strategy.CityNiceScore;
+import strategy.IdStrategy;
+import strategy.ImplementStrategy;
+import strategy.NiceScore;
 import visitor.ElfCalculator;
 import visitor.SantasCalculator;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public final class Operator {
@@ -41,7 +46,13 @@ public final class Operator {
             child.acceptElf(elfVisitor);
         }
     }
-
+    public void sortById() {
+        Database database = Database.getDatabase();
+        ArrayList<Children> childList;
+        childList = database.getInitialChildren();
+        childList.sort(Comparator.comparing(Children :: getId));
+        database.setInitialChildren(childList);
+    }
     /**
      * calculates gifts
      */
@@ -49,29 +60,32 @@ public final class Operator {
         Double budget;
         int ok;
         Database database = Database.getDatabase();
-        for (Children child: database.getInitialChildren()) {
+        for (Children child: database.getInitialChildren()) { //i get the kids from the database
             budget = 0.0;
-            ArrayList<Gift> alocatedGifts = new ArrayList<>();
-            for (String preference: child.getGiftsPreferences()) {
-                if (budget < child.getAssignedBudget()) {
+            ArrayList<Gift> alocatedGifts = new ArrayList<>(); //i create the recived gifts list for the current children
+            for (String preference: child.getGiftsPreferences()) { // i parse the preferences
+                if (budget < child.getAssignedBudget()) {// i check if he didn't spent all his bugdet
                     ok = 0;
                     Gift aux = null;
-                    for (Gift gift: database.getInitialGifts()) {
-                        if (gift.getCategory().equals(preference)) {
-                            if (ok == 0) {
-                                aux = gift; // iau primul cadou din categorie daca gasesc
-                                ok = 1;
-                            } else {
-                                if (aux.getPrice() > gift.getPrice()) {
-                                    aux = gift; //iau cel mai ieftin cadou din categorie
+                    for (Gift gift: database.getInitialGifts()) { // i parse santa's gift list
+                        if (gift.getCategory().equals(preference)) { //check to see if there is a prefered gift
+                            if (gift.getQuantity() > 0) {   //check if the gift is still avalabile
+                                if (ok == 0) {
+                                    aux = gift; // memorize the first gift
+                                    ok = 1;
+                                } else {    //if i find more
+                                    if (aux.getPrice() > gift.getPrice()) {
+                                        aux = gift; //memorize the cheapest gift
+                                    }
                                 }
                             }
                         }
                     }
-                    if (aux != null) {
+                    if (aux != null) { //if a gift is selected
                         if (budget + aux.getPrice() <= child.getAssignedBudget()) {
-                            alocatedGifts.add(aux);
-                            budget = budget + aux.getPrice();
+                            aux.setQuantity(aux.getQuantity() - 1); //as aux is a reference to the database, i modify the quantity directly
+                            alocatedGifts.add(aux); //i add it in the recived gift list
+                            budget = budget + aux.getPrice(); // i modify the budget
                         }
                     }
                 }
@@ -85,41 +99,42 @@ public final class Operator {
      * @param noYear
      */
     public void realocateBudget(final int noYear) {
-        Database database = Database.getDatabase();
+        Database database = Database.getDatabase(); //i get the database reference
         AnnualChanges annualChange;
-        annualChange = database.getAnnualChanges().get(noYear);
-        database.setInitialBudget(annualChange.getNewBudget());
+        annualChange = database.getAnnualChanges().get(noYear); // gets's the update from a specific year
+        database.setInitialBudget(annualChange.getNewBudget()); // updates the budget
     }
 
     /**
      * increses all children ages with 1
      */
     public void incrementChildrensAge() {
-        Database database = Database.getDatabase();
+        Database database = Database.getDatabase(); //i get the database instance
         ArrayList<Children> childrenList = database.getInitialChildren();
-        ArrayList<Children> updatedChildrenList = new ArrayList<>();
+        ArrayList<Children> updatedChildrenList = new ArrayList<>(); //i create a new list
         for (Children child: childrenList) {
 
-            child.setAge(child.getAge() + 1);
+            child.setAge(child.getAge() + 1);// i add 1 to all the children's age
 
-            if (child.getAge().intValue() == Constants.FIVE) {
+            if (child.getAge().intValue() == Constants.FIVE) { // if they get to five they pass form baby to kid
                 updatedChildrenList.add(new Kid(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getCity(),
                         child.getAge(), child.getNiceScoreHistory(),
                         child.getGiftsPreferences(), child.getNiceScoreBonus(), child.getElf()));
-            } else if (child.getAge().intValue() == Constants.TWELVE) {
+            } else if (child.getAge().intValue() == Constants.TWELVE) { // at 12 from kid to teen
                 updatedChildrenList.add(new Teen(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getCity(),
                         child.getAge(), child.getNiceScoreHistory(),
                         child.getGiftsPreferences(), child.getNiceScoreBonus(), child.getElf()));
             } else if (child.getAge().intValue() > Constants.EIGHTEEN) {
-                continue;
+                continue; // and at over 18 i delete them from the list
                 //nothing to see here
             } else {
-                updatedChildrenList.add(child);
+                updatedChildrenList.add(child); // they are still sorted by id as this age incrementation
+                                                // does not affect the order of the kids
             }
         }
-        database.setInitialChildren(updatedChildrenList);
+        database.setInitialChildren(updatedChildrenList); // i put them back in the database
     }
 
     /**
@@ -174,17 +189,59 @@ public final class Operator {
                     newPreferences = (ArrayList<String>) newPreferences.stream()
                             .distinct().collect(Collectors.toList());
                     child.setGiftsPreferences(newPreferences);
+                    child.setElf(update.getElf());
                 }
             }
         }
     }
 
     /**
-     * adds the data from specific year to the database
+     * here i update the strategy in the database
+     * year by year
+     * @param noYear
+     */
+    public void setNewStrategy(final int noYear) {
+        Database database = Database.getDatabase();
+        AnnualChanges annualChange;
+        annualChange = database.getAnnualChanges().get(noYear);
+        database.setCurrentStrategy(annualChange.getStrategy());
+    }
+
+    /**
+     * i use Strategy pattern for distributing gifts
+     */
+    public void useStrategy() {
+        Database database = Database.getDatabase();
+        ArrayList<Children> children = database.getInitialChildren();
+        ArrayList<Children> childrenWithGifts;
+        String strategy = database.getCurrentStrategy();
+        ImplementStrategy implement;
+        switch (strategy) {
+            case "id":
+                implement = new ImplementStrategy(new IdStrategy());
+                childrenWithGifts = implement.applyStrategy(children);
+                break;
+            case "niceScore" :
+                implement = new ImplementStrategy(new NiceScore());
+                childrenWithGifts = implement.applyStrategy(children);
+                break;
+            case "niceScoreCity" :
+                implement = new ImplementStrategy(new CityNiceScore());
+                childrenWithGifts = implement.applyStrategy(children);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + strategy);
+        }
+        database.setInitialChildren(childrenWithGifts);
+    }
+    /**
+     * adds all the data from specific year to the database
      * @param noYear
      */
     public void incrementRound(final int noYear) {
+
         realocateBudget(noYear);
+        setNewStrategy(noYear);
         incrementChildrensAge();
         addGifts(noYear);
         addNewChildren(noYear);

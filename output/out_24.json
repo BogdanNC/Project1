@@ -112,8 +112,8 @@
       "niceScoreHistory" : [ 4.0, 8.0, 8.0, 1.0 ],
       "assignedBudget" : 375.7608069164265,
       "receivedGifts" : [ {
-        "productName" : "Teddy Bear",
-        "price" : 5.0,
+        "productName" : "Doll",
+        "price" : 10.0,
         "category" : "Toys"
       }, {
         "productName" : "Handbag",
@@ -133,10 +133,10 @@
       "giftsPreferences" : [ "Toys", "Sweets" ],
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 6.0 ],
-      "assignedBudget" : 664.6109510086455,
+      "assignedBudget" : 511.23919308357347,
       "receivedGifts" : [ {
-        "productName" : "Teddy Bear",
-        "price" : 5.0,
+        "productName" : "Doll",
+        "price" : 10.0,
         "category" : "Toys"
       }, {
         "productName" : "Bag of Candy",
@@ -164,8 +164,8 @@
         "price" : 45.0,
         "category" : "Clothes"
       }, {
-        "productName" : "Teddy Bear",
-        "price" : 5.0,
+        "productName" : "Doll",
+        "price" : 10.0,
         "category" : "Toys"
       } ]
     }, {
@@ -183,8 +183,8 @@
         "price" : 45.0,
         "category" : "Clothes"
       }, {
-        "productName" : "Teddy Bear",
-        "price" : 5.0,
+        "productName" : "Doll",
+        "price" : 10.0,
         "category" : "Toys"
       }, {
         "productName" : "Bag of Candy",

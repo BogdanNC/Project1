@@ -61,13 +61,15 @@ public final class Main {
         for (File file : Objects.requireNonNull(directory.listFiles())) {
                 String fileName = file.getName();
                 fileName = fileName.substring(Constants.FANTASTIC_FOUR);
-                String filepath = Constants.OUTPUT_PATH + fileName;
-                File out = new File(filepath);
-                boolean isCreated = out.createNewFile();
-                if (isCreated) {
-                    File testFile = new File("tests/" + file.getName());
-                    action(testFile.getPath(), filepath);
-                }
+                //if( fileName.equals("14.json")) {
+                    String filepath = Constants.OUTPUT_PATH + fileName;
+                    File out = new File(filepath);
+                    boolean isCreated = out.createNewFile();
+                    if (isCreated) {
+                        File testFile = new File("tests/" + file.getName());
+                        action(testFile.getPath(), filepath);
+                    }
+               // }
         }
         Checker.calculateScore();
     }
@@ -83,12 +85,14 @@ public final class Main {
         InputLoader inputLoader = new InputLoader(filePath1);
         inputLoader.readData();
         Database database = Database.getDatabase();
+        database.setCurrentStrategy("id");
 
         Operator operator = new Operator();
         operator.calculateAverageScore();
         operator.calculateAlocatedBudget();
+        operator.useStrategy();
         operator.alocateGifts();
-
+        operator.sortById();
         ArrayList<Children> toPrintChildren = new ArrayList<>();
         AnnualChildren annualChildren = new AnnualChildren();
         ArrayList<AnnualChildren> forPrint = new ArrayList<>();
@@ -104,7 +108,9 @@ public final class Main {
             operator.incrementRound(i);
             operator.calculateAverageScore();
             operator.calculateAlocatedBudget();
+            operator.useStrategy();
             operator.alocateGifts();
+            operator.sortById();
             for (Children child : database.getInitialChildren()) {
                 newToPrintChildren.add(new Children(child));
             }

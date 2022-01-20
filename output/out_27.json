@@ -87,11 +87,11 @@
       "giftsPreferences" : [ "Sweets", "Board Games", "Toys" ],
       "averageScore" : 4.4,
       "niceScoreHistory" : [ 4.0 ],
-      "assignedBudget" : 10.92212389380531,
+      "assignedBudget" : 15.603034134007586,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
+        "productName" : "Chocolate",
+        "price" : 15.0,
+        "category" : "Sweets"
       } ]
     }, {
       "id" : 1,
@@ -102,15 +102,11 @@
       "giftsPreferences" : [ "Books", "Sweets", "Board Games" ],
       "averageScore" : 9.333333333333334,
       "niceScoreHistory" : [ 2.0, 9.0 ],
-      "assignedBudget" : 43.02654867256637,
+      "assignedBudget" : 23.168141592920357,
       "receivedGifts" : [ {
-        "productName" : "Twilight",
-        "price" : 30.0,
-        "category" : "Books"
-      }, {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
+        "productName" : "Chocolate",
+        "price" : 15.0,
+        "category" : "Sweets"
       } ]
     }, {
       "id" : 2,
@@ -140,10 +136,10 @@
       "giftsPreferences" : [ "Board Games", "Books", "Sweets" ],
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 2.0, 10.0 ],
-      "assignedBudget" : 35.4614412136536,
+      "assignedBudget" : 46.099873577749676,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Monopoly",
+        "price" : 30.0,
         "category" : "Board Games"
       }, {
         "productName" : "Chocolate",
@@ -161,13 +157,9 @@
       "niceScoreHistory" : [ 7.0 ],
       "assignedBudget" : 35.4614412136536,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Monopoly",
+        "price" : 30.0,
         "category" : "Board Games"
-      }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
-        "category" : "Sweets"
       } ]
     }, {
       "id" : 5,
@@ -180,13 +172,9 @@
       "niceScoreHistory" : [ 6.0 ],
       "assignedBudget" : 41.489886219974714,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
-      }, {
-        "productName" : "Twilight",
+        "productName" : "Monopoly",
         "price" : 30.0,
-        "category" : "Books"
+        "category" : "Board Games"
       } ]
     } ]
   }, {
@@ -199,15 +187,11 @@
       "giftsPreferences" : [ "Board Games", "Sweets", "Toys" ],
       "averageScore" : 4.4,
       "niceScoreHistory" : [ 4.0 ],
-      "assignedBudget" : 46.84821428571429,
+      "assignedBudget" : 66.92602040816327,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Puzzle",
+        "price" : 50.0,
         "category" : "Board Games"
-      }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
-        "category" : "Sweets"
       }, {
         "productName" : "Castle",
         "price" : 15.0,
@@ -222,18 +206,14 @@
       "giftsPreferences" : [ "Books", "Sweets", "Board Games" ],
       "averageScore" : 8.866666666666667,
       "niceScoreHistory" : [ 2.0, 9.0, 6.0 ],
-      "assignedBudget" : 175.3258928571429,
+      "assignedBudget" : 134.86607142857144,
       "receivedGifts" : [ {
-        "productName" : "Twilight",
-        "price" : 30.0,
-        "category" : "Books"
-      }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
+        "productName" : "Bag of Candy",
+        "price" : 20.0,
         "category" : "Sweets"
       }, {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Puzzle",
+        "price" : 50.0,
         "category" : "Board Games"
       } ]
     }, {
@@ -247,8 +227,8 @@
       "niceScoreHistory" : [ 7.0, 10.0 ],
       "assignedBudget" : 152.1045918367347,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Monopoly",
+        "price" : 30.0,
         "category" : "Board Games"
       }, {
         "productName" : "Castle",
@@ -272,10 +252,10 @@
       "giftsPreferences" : [ "Board Games", "Sweets", "Books" ],
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 2.0, 10.0 ],
-      "assignedBudget" : 152.1045918367347,
+      "assignedBudget" : 106.47321428571428,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Monopoly",
+        "price" : 30.0,
         "category" : "Board Games"
       }, {
         "productName" : "Chocolate",
@@ -295,14 +275,14 @@
       "giftsPreferences" : [ "Board Games", "Sweets", "Books" ],
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 7.0, 5.0 ],
-      "assignedBudget" : 152.1045918367347,
+      "assignedBudget" : 197.73596938775512,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Monopoly",
+        "price" : 30.0,
         "category" : "Board Games"
       }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
+        "productName" : "Bag of Candy",
+        "price" : 20.0,
         "category" : "Sweets"
       }, {
         "productName" : "Twilight",
@@ -318,18 +298,18 @@
       "giftsPreferences" : [ "Sweets", "Toys", "Board Games", "Books" ],
       "averageScore" : 9.0,
       "niceScoreHistory" : [ 6.0 ],
-      "assignedBudget" : 177.9623724489796,
+      "assignedBudget" : 136.89413265306123,
       "receivedGifts" : [ {
-        "productName" : "Chocolate",
-        "price" : 15.0,
+        "productName" : "Bag of Candy",
+        "price" : 20.0,
         "category" : "Sweets"
       }, {
         "productName" : "Castle",
         "price" : 15.0,
         "category" : "Toys"
       }, {
-        "productName" : "Uno",
-        "price" : 10.0,
+        "productName" : "Monopoly",
+        "price" : 30.0,
         "category" : "Board Games"
       }, {
         "productName" : "Twilight",
@@ -347,11 +327,11 @@
       "giftsPreferences" : [ "Board Games", "Sweets", "Toys" ],
       "averageScore" : 4.4,
       "niceScoreHistory" : [ 4.0 ],
-      "assignedBudget" : 19.973418881759855,
+      "assignedBudget" : 37.09349220898259,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
+        "productName" : "Milk and Cookies",
+        "price" : 30.0,
+        "category" : "Sweets"
       } ]
     }, {
       "id" : 1,
@@ -362,23 +342,15 @@
       "giftsPreferences" : [ "Board Games", "Books", "Toys", "Sweets" ],
       "averageScore" : 9.24,
       "niceScoreHistory" : [ 2.0, 9.0, 6.0, 7.0 ],
-      "assignedBudget" : 77.89633363886342,
+      "assignedBudget" : 59.92025664527956,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
-      }, {
-        "productName" : "Twilight",
-        "price" : 30.0,
+        "productName" : "Harry Potter",
+        "price" : 35.0,
         "category" : "Books"
       }, {
         "productName" : "Castle",
         "price" : 15.0,
         "category" : "Toys"
-      }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
-        "category" : "Sweets"
       } ]
     }, {
       "id" : 2,
@@ -389,18 +361,14 @@
       "giftsPreferences" : [ "Clothes", "Board Games", "Toys", "Sweets", "Books" ],
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 7.0, 10.0, 9.0 ],
-      "assignedBudget" : 64.8487626031164,
+      "assignedBudget" : 45.39413382218147,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
-      }, {
         "productName" : "Castle",
         "price" : 15.0,
         "category" : "Toys"
       }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
+        "productName" : "Milk and Cookies",
+        "price" : 30.0,
         "category" : "Sweets"
       } ]
     }, {
@@ -414,16 +382,12 @@
       "niceScoreHistory" : [ 2.0, 10.0 ],
       "assignedBudget" : 64.8487626031164,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
-      }, {
         "productName" : "Castle",
         "price" : 15.0,
         "category" : "Toys"
       }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
+        "productName" : "Milk and Cookies",
+        "price" : 30.0,
         "category" : "Sweets"
       } ]
     }, {
@@ -437,12 +401,8 @@
       "niceScoreHistory" : [ 7.0, 5.0 ],
       "assignedBudget" : 64.8487626031164,
       "receivedGifts" : [ {
-        "productName" : "Uno",
-        "price" : 10.0,
-        "category" : "Board Games"
-      }, {
-        "productName" : "Chocolate",
-        "price" : 15.0,
+        "productName" : "Milk and Cookies",
+        "price" : 30.0,
         "category" : "Sweets"
       }, {
         "productName" : "Castle",

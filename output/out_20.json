@@ -53,7 +53,7 @@
       "giftsPreferences" : [ "Toys", "Sweets" ],
       "averageScore" : 7.366666666666667,
       "niceScoreHistory" : [ 9.0, 4.0 ],
-      "assignedBudget" : 341.0588235294118,
+      "assignedBudget" : 238.74117647058827,
       "receivedGifts" : [ {
         "productName" : "Bike",
         "price" : 25.0,
@@ -126,12 +126,8 @@
       "niceScoreHistory" : [ 9.0, 4.0, 9.0 ],
       "assignedBudget" : 313.4054054054054,
       "receivedGifts" : [ {
-        "productName" : "Bike",
-        "price" : 25.0,
-        "category" : "Toys"
-      }, {
-        "productName" : "Gummy Bears",
-        "price" : 10.0,
+        "productName" : "Chocolate",
+        "price" : 15.0,
         "category" : "Sweets"
       } ]
     }, {
@@ -143,10 +139,10 @@
       "giftsPreferences" : [ "Sweets", "Books", "Board Games", "Technology" ],
       "averageScore" : 7.6,
       "niceScoreHistory" : [ 3.0, 0.0, 7.0 ],
-      "assignedBudget" : 174.89336609336607,
+      "assignedBudget" : 249.84766584766584,
       "receivedGifts" : [ {
-        "productName" : "Gummy Bears",
-        "price" : 10.0,
+        "productName" : "Chocolate",
+        "price" : 15.0,
         "category" : "Sweets"
       }, {
         "productName" : "Diary of a Wimpy Kid",
@@ -166,7 +162,7 @@
       "giftsPreferences" : [ "Board Games", "Toys", "Sweets", "Books" ],
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 9.0, 7.0 ],
-      "assignedBudget" : 230.1228501228501,
+      "assignedBudget" : 328.74692874692875,
       "receivedGifts" : [ {
         "productName" : "Uno",
         "price" : 10.0,
@@ -176,8 +172,8 @@
         "price" : 25.0,
         "category" : "Toys"
       }, {
-        "productName" : "Gummy Bears",
-        "price" : 10.0,
+        "productName" : "Chocolate",
+        "price" : 15.0,
         "category" : "Sweets"
       }, {
         "productName" : "Diary of a Wimpy Kid",
@@ -195,18 +191,10 @@
       "giftsPreferences" : [ "Books", "Toys", "Sweets" ],
       "averageScore" : 9.533333333333333,
       "niceScoreHistory" : [ 9.0, 4.0, 9.0 ],
-      "assignedBudget" : 120.81450252951097,
+      "assignedBudget" : 84.57015177065767,
       "receivedGifts" : [ {
-        "productName" : "Diary of a Wimpy Kid",
-        "price" : 25.0,
-        "category" : "Books"
-      }, {
-        "productName" : "Bike",
-        "price" : 25.0,
-        "category" : "Toys"
-      }, {
-        "productName" : "Gummy Bears",
-        "price" : 10.0,
+        "productName" : "Chocolate",
+        "price" : 15.0,
         "category" : "Sweets"
       } ]
     }, {
@@ -218,10 +206,10 @@
       "giftsPreferences" : [ "Sweets", "Books", "Board Games", "Technology" ],
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 3.0, 0.0, 7.0, 10.0 ],
-      "assignedBudget" : 88.70994940978078,
+      "assignedBudget" : 126.72849915682968,
       "receivedGifts" : [ {
-        "productName" : "Gummy Bears",
-        "price" : 10.0,
+        "productName" : "Chocolate",
+        "price" : 15.0,
         "category" : "Sweets"
       }, {
         "productName" : "Diary of a Wimpy Kid",
@@ -247,12 +235,8 @@
         "price" : 10.0,
         "category" : "Board Games"
       }, {
-        "productName" : "Bike",
-        "price" : 25.0,
-        "category" : "Toys"
-      }, {
-        "productName" : "Gummy Bears",
-        "price" : 10.0,
+        "productName" : "Chocolate",
+        "price" : 15.0,
         "category" : "Sweets"
       }, {
         "productName" : "Diary of a Wimpy Kid",
@@ -269,11 +253,7 @@
       "averageScore" : 10.0,
       "niceScoreHistory" : [ 8.0 ],
       "assignedBudget" : 164.74704890387858,
-      "receivedGifts" : [ {
-        "productName" : "Bike",
-        "price" : 25.0,
-        "category" : "Toys"
-      } ]
+      "receivedGifts" : [ ]
     } ]
   } ]
 }
