@@ -4,14 +4,20 @@ import players.Children;
 
 import java.util.ArrayList;
 
-public class ImplementStrategy {
+public final class ImplementStrategy {
     private GiftingStretegy stretegy;
 
-    public ImplementStrategy(GiftingStretegy stretegy) {
+    public ImplementStrategy(final GiftingStretegy stretegy) {
         this.stretegy = stretegy;
     }
 
-    public ArrayList<Children> applyStrategy(ArrayList<Children> children) {
+    /**
+     * this is the function that clarifies at runtime which
+     * strategy to implement
+     * @param children
+     * @return
+     */
+    public ArrayList<Children> applyStrategy(final ArrayList<Children> children) {
         return stretegy.calculatingStrategy(children);
     }
 }

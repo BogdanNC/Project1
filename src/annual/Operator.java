@@ -46,6 +46,10 @@ public final class Operator {
             child.acceptElf(elfVisitor);
         }
     }
+
+    /**
+     * sorts by id the childrens
+     */
     public void sortById() {
         Database database = Database.getDatabase();
         ArrayList<Children> childList;
@@ -62,13 +66,16 @@ public final class Operator {
         Database database = Database.getDatabase();
         for (Children child: database.getInitialChildren()) { //i get the kids from the database
             budget = 0.0;
-            ArrayList<Gift> alocatedGifts = new ArrayList<>(); //i create the recived gifts list for the current children
-            for (String preference: child.getGiftsPreferences()) { // i parse the preferences
-                if (budget < child.getAssignedBudget()) {// i check if he didn't spent all his bugdet
+            //i create the recived gifts list for the current children
+            ArrayList<Gift> alocatedGifts = new ArrayList<>();
+            for (String preference: child.getGiftsPreferences()) {
+                // i check if the child didn't spent all his bugdet
+                if (budget < child.getAssignedBudget()) {
                     ok = 0;
                     Gift aux = null;
                     for (Gift gift: database.getInitialGifts()) { // i parse santa's gift list
-                        if (gift.getCategory().equals(preference)) { //check to see if there is a prefered gift
+                        //check to see if there is a prefered gift
+                        if (gift.getCategory().equals(preference)) {
                             if (gift.getQuantity() > 0) {   //check if the gift is still avalabile
                                 if (ok == 0) {
                                     aux = gift; // memorize the first gift
@@ -83,7 +90,8 @@ public final class Operator {
                     }
                     if (aux != null) { //if a gift is selected
                         if (budget + aux.getPrice() <= child.getAssignedBudget()) {
-                            aux.setQuantity(aux.getQuantity() - 1); //as aux is a reference to the database, i modify the quantity directly
+                            //as aux is a reference to the database, i modify the quantity directly
+                            aux.setQuantity(aux.getQuantity() - 1);
                             alocatedGifts.add(aux); //i add it in the recived gift list
                             budget = budget + aux.getPrice(); // i modify the budget
                         }
@@ -101,7 +109,8 @@ public final class Operator {
     public void realocateBudget(final int noYear) {
         Database database = Database.getDatabase(); //i get the database reference
         AnnualChanges annualChange;
-        annualChange = database.getAnnualChanges().get(noYear); // gets's the update from a specific year
+        // gets's the update from a specific year
+        annualChange = database.getAnnualChanges().get(noYear);
         database.setInitialBudget(annualChange.getNewBudget()); // updates the budget
     }
 
@@ -114,9 +123,9 @@ public final class Operator {
         ArrayList<Children> updatedChildrenList = new ArrayList<>(); //i create a new list
         for (Children child: childrenList) {
 
-            child.setAge(child.getAge() + 1);// i add 1 to all the children's age
-
-            if (child.getAge().intValue() == Constants.FIVE) { // if they get to five they pass form baby to kid
+            child.setAge(child.getAge() + 1); // i add 1 to all the children's age
+            // if they get to five they pass form baby to kid
+            if (child.getAge().intValue() == Constants.FIVE) {
                 updatedChildrenList.add(new Kid(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getCity(),
                         child.getAge(), child.getNiceScoreHistory(),
@@ -130,11 +139,13 @@ public final class Operator {
                 continue; // and at over 18 i delete them from the list
                 //nothing to see here
             } else {
-                updatedChildrenList.add(child); // they are still sorted by id as this age incrementation
-                                                // does not affect the order of the kids
+                updatedChildrenList.add(child);
+                // they are still sorted by id as this age incrementation
+                // does not affect the order of the kids
             }
         }
-        database.setInitialChildren(updatedChildrenList); // i put them back in the database
+        // i put them back in the database
+        database.setInitialChildren(updatedChildrenList);
     }
 
     /**
@@ -233,6 +244,56 @@ public final class Operator {
                 throw new IllegalStateException("Unexpected value: " + strategy);
         }
         database.setInitialChildren(childrenWithGifts);
+    }
+
+    /**
+     * in this function i return a list containging just one
+     * gift, or a empty list. The element is the cheapest form the
+     * selected preference
+     * @param preference
+     * @return
+     */
+    public ArrayList<Gift> giveGift(final String preference) {
+        Database database = Database.getDatabase();
+        ArrayList<Gift> alocatedGifts = new ArrayList<>();
+        Gift aux = null;
+        int ok = 0;
+        for (Gift gift: database.getInitialGifts()) { // i parse santa's gift list
+            if (gift.getCategory().equals(preference)) { //check to see if there is a prefered gift
+                if (ok == 0) {
+                    aux = gift; // memorize the first gift
+                    ok = 1;
+                } else {    //if i find more
+                    if (aux.getPrice() > gift.getPrice()) {
+                        aux = gift; //memorize the cheapest gift
+                    }
+                }
+            }
+        }
+        if (aux != null) { //if a gift is selected
+            if (aux.getQuantity() > 0) { //if a gift is still avalable
+                aux.setQuantity(aux.getQuantity() - 1); //same as before
+                alocatedGifts.add(aux); //i add it in the recived gift list
+            }
+        }
+        return alocatedGifts;
+    }
+
+    /**
+     * i implement the yellow elf functionality
+     */
+    public void yellowElfMagic() {
+        Database database = Database.getDatabase();
+        ArrayList<Children> childrenList = database.getInitialChildren();
+        for (Children child : childrenList) {
+            if (child.getElf().equals("yellow")) {
+                if (child.getReceivedGifts().isEmpty()) {
+                    String preference;
+                    preference = child.getGiftsPreferences().get(0);
+                    child.setReceivedGifts(giveGift(preference));
+                }
+            }
+        }
     }
     /**
      * adds all the data from specific year to the database

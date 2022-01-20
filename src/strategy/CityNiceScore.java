@@ -5,19 +5,18 @@ import players.City;
 
 import java.util.ArrayList;
 
-import java.util.Map;
 
-public class CityNiceScore implements GiftingStretegy {
+public final class CityNiceScore implements GiftingStretegy {
 
-    private ArrayList<City> calculateCityScore(ArrayList<Children> childList) {
+    private ArrayList<City> calculateCityScore(final ArrayList<Children> childList) {
         ArrayList<City> cities = new ArrayList<>();
         String cityName;
         Double average;
         for (Children child : childList) {
             cityName = child.getCity();
             int exists = 0;
-            for (City city: cities ) {
-                if(city.getCityName().equals(cityName)) {
+            for (City city: cities) {
+                if (city.getCityName().equals(cityName)) {
                     exists = 1;
                     average = city.getCityAverageScore();
                     average = average + child.getAverageScore();
@@ -48,7 +47,7 @@ public class CityNiceScore implements GiftingStretegy {
         return cities;
     }
     @Override
-    public ArrayList<Children> calculatingStrategy(ArrayList<Children> childList) {
+    public ArrayList<Children> calculatingStrategy(final ArrayList<Children> childList) {
         ArrayList<City> cities = calculateCityScore(childList);
         ArrayList<Children> cityOrderedChids = new ArrayList<>();
         for (City city : cities) {

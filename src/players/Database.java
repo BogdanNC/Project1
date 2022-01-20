@@ -73,7 +73,7 @@ public final class Database {
         return currentStrategy;
     }
 
-    public void setCurrentStrategy(String currentStrategy) {
+    public void setCurrentStrategy(final String currentStrategy) {
         this.currentStrategy = currentStrategy;
     }
 }

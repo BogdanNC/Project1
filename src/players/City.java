@@ -1,9 +1,9 @@
 package players;
 
 public final class City {
-    String cityName;
-    Double cityAverageScore;
-    Double numberOfResidents;
+    private String cityName;
+    private Double cityAverageScore;
+    private Double numberOfResidents;
 
     public String getCityName() {
         return cityName;
